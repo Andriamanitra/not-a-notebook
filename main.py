@@ -48,9 +48,10 @@ class InputCell(tkinter.Frame):
     def text(self):
         return self.text_input.get(1.0, "end")
 
-    def set_text(self, text):
+    @text.setter
+    def text(self, value):
         self.text_input.delete(1.0, "end")
-        self.text_input.insert(1.0, text)
+        self.text_input.insert(1.0, value)
 
     def cursor_pos(self):
         pos_str = self.text_input.index(tkinter.INSERT)
@@ -75,7 +76,7 @@ class InputCell(tkinter.Frame):
         self.text_input.config(height=old_height + 1)
 
     def submit(self, ev):
-        self.set_text(self.text.rstrip())
+        self.text = self.text.rstrip()
         row, _col = self.cursor_pos()
         self.text_input.config(height=row)
 
